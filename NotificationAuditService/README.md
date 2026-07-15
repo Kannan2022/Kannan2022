@@ -66,30 +66,6 @@ A comprehensive .NET 8 Web API for managing notifications and audit logging with
 - CreatedAt
 - (RecipientId, IsRead)
 
-## Project Structure
-
-```
-.
-├── src/
-│   ├── models/              # Data models
-│   │   ├── Notification.cs
-│   │   └── AuditLog.cs
-│   ├── services/            # Business logic
-│   │   ├── INotificationService.cs
-│   │   ├── NotificationService.cs
-│   │   ├── IAuditService.cs
-│   │   └── AuditService.cs
-│   ├── data/                # Database context
-│   │   └── AuditDbContext.cs
-│   └── Program.cs
-├── tests/                   # Unit and integration tests
-├── projects/                # Project-related files
-├── .github/                 # GitHub-specific files
-├── README.md
-├── NotificationAuditService.csproj
-└── appsettings.json
-```
-
 ## API Endpoints
 
 ### Notifications
