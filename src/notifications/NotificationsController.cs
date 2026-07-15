@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using NotificationAuditService.Models;
-using NotificationAuditService.Services;
 
-namespace NotificationAuditService.Controllers;
+namespace NotificationAuditService.Notifications;
 
 [ApiController]
 [Route("api/[controller]")]

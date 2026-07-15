@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NotificationAuditService.Data;
-using NotificationAuditService.Models;
 
-namespace NotificationAuditService.Services;
+namespace NotificationAuditService.Notifications;
 
 public class NotificationService : INotificationService
 {

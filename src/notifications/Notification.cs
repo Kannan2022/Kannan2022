@@ -1,4 +1,4 @@
-namespace NotificationAuditService.Models;
+namespace NotificationAuditService.Notifications;
 
 public class Notification
 {

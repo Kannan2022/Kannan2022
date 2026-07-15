@@ -36,3 +36,20 @@ CREATE TABLE IF NOT EXISTS Notifications (
 CREATE INDEX IF NOT EXISTS IX_Notifications_RecipientId ON Notifications(RecipientId);
 CREATE INDEX IF NOT EXISTS IX_Notifications_CreatedAt ON Notifications(CreatedAt);
 CREATE INDEX IF NOT EXISTS IX_Notifications_RecipientId_IsRead ON Notifications(RecipientId, IsRead);
+
+CREATE TABLE IF NOT EXISTS Projects (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    OrganizationId TEXT NOT NULL,
+    Name TEXT NOT NULL,
+    Description TEXT,
+    Status TEXT NOT NULL,
+    TeamId TEXT NOT NULL,
+    CreatedAt DATETIME NOT NULL,
+    UpdatedAt DATETIME
+);
+
+-- Tenant-first indexes: every query is scoped by OrganizationId.
+CREATE INDEX IF NOT EXISTS IX_Projects_OrganizationId ON Projects(OrganizationId);
+CREATE INDEX IF NOT EXISTS IX_Projects_OrganizationId_TeamId ON Projects(OrganizationId, TeamId);
+CREATE INDEX IF NOT EXISTS IX_Projects_OrganizationId_TeamId_Status ON Projects(OrganizationId, TeamId, Status);
+CREATE INDEX IF NOT EXISTS IX_Projects_OrganizationId_CreatedAt ON Projects(OrganizationId, CreatedAt);

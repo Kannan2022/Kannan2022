@@ -1,8 +1,12 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using NotificationAuditService.Audit;
+using NotificationAuditService.Common;
 using NotificationAuditService.Data;
-using NotificationAuditService.Services;
+using NotificationAuditService.Notifications;
+using NotificationAuditService.Projects;
 
-var builder = WebApplicationBuilder.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddDbContext<AuditDbContext>(options =>
@@ -11,7 +15,17 @@ builder.Services.AddDbContext<AuditDbContext>(options =>
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IAuditService, AuditService>();
 
-builder.Services.AddControllers();
+// Project feature: model -> repository -> service -> controller
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
+
+// Multi-tenant context resolved from the authenticated principal
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ITenantContext, TenantContext>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
@@ -44,3 +58,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+/// <summary>
+/// Exposed so integration tests can bootstrap the application via
+/// <see cref="Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory{TEntryPoint}"/>.
+/// </summary>
+public partial class Program { }

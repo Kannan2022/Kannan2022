@@ -1,6 +1,4 @@
-using NotificationAuditService.Models;
-
-namespace NotificationAuditService.Services;
+namespace NotificationAuditService.Notifications;
 
 public interface INotificationService
 {

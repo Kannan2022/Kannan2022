@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using NotificationAuditService.Models;
+using NotificationAuditService.Audit;
+using NotificationAuditService.Notifications;
+using NotificationAuditService.Projects;
 
 namespace NotificationAuditService.Data;
 
@@ -11,6 +13,7 @@ public class AuditDbContext : DbContext
 
     public DbSet<AuditLog> AuditLogs { get; set; }
     public DbSet<Notification> Notifications { get; set; }
+    public DbSet<Project> Projects { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,6 +46,24 @@ public class AuditDbContext : DbContext
             entity.HasIndex(e => e.RecipientId);
             entity.HasIndex(e => e.CreatedAt);
             entity.HasIndex(e => new { e.RecipientId, e.IsRead });
+        });
+
+        // Project configuration
+        modelBuilder.Entity<Project>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.OrganizationId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Description).HasMaxLength(2000);
+            entity.Property(e => e.TeamId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Status).HasConversion<string>().HasMaxLength(50);
+
+            // Tenant-first composite indexes: every access pattern begins with the organisation,
+            // matching how the repository scopes each query.
+            entity.HasIndex(e => e.OrganizationId);
+            entity.HasIndex(e => new { e.OrganizationId, e.TeamId });
+            entity.HasIndex(e => new { e.OrganizationId, e.TeamId, e.Status });
+            entity.HasIndex(e => new { e.OrganizationId, e.CreatedAt });
         });
     }
 }
