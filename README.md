@@ -15,6 +15,7 @@ A comprehensive .NET 8 Web API for managing notifications and audit logging with
 | [FEATURE_USAGE_LOG.md](docs/FEATURE_USAGE_LOG.md) | Which Copilot feature was used where, why that feature over another, and what happened. |
 | [TOOL_STRATEGY.md](docs/TOOL_STRATEGY.md) | Which AI features fit which tasks, accept-vs-override heuristics, guardrails, and risks. |
 | [REVIEW.md](docs/REVIEW.md) | Structured code review of the Project service (found the cross-tenant IDOR). |
+| [LIMITATIONS.md](docs/LIMITATIONS.md) | Real cases where Copilot output was wrong/incomplete — detection, fix, and lessons. |
 | [IMPACT_ANALYSIS.md](docs/IMPACT_ANALYSIS.md) | Impact of capturing caller IP addresses — affected components, compliance risks, rollout sequencing. |
 
 ## Features
