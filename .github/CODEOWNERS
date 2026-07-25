@@ -1,0 +1,15 @@
+# Code owners — automatically requested for review on matching paths.
+# See https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything in the repo
+*                       @Kannan2022
+
+# Application source
+/src/                   @Kannan2022
+
+# Tests
+/tests/                 @Kannan2022
+
+# Standards & AI guidance (change with care — every prompt inherits these)
+/.github/               @Kannan2022
+/docs/                  @Kannan2022
