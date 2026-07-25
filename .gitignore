@@ -14,7 +14,8 @@ obj/
 *.suo
 
 ## Entity Framework ##
-Migrations/
+# Migrations are tracked in source control so the schema builds on a fresh clone
+# (Program.cs applies them at startup via context.Database.Migrate()).
 
 ## SQLite ##
 *.db
