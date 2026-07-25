@@ -1,0 +1,107 @@
+GithubCopilotAssesment/
+.github/
+    CODEOWNERS
+    copilot-instructions.md
+    pull_request_template.md
+.gitignore
+appsettings.json
+CHANGELOG.md
+CONTRIBUTING.md
+docs/
+    ARCHITECTURE.md
+    ARCHITECTURE_FINTECH.md
+    FEATURE_USAGE_LOG.md
+    IMPACT_ANALYSIS.md
+    LIMITATIONS.md
+    PR_DESCRIPTION.md
+    PROMPT_ENGINEERING.md
+    PROMPTS.md
+    REVIEW.md
+    SPEC.md
+    TOOL_STRATEGY.md
+GithubCopilotAssesment.sln
+Migrations/
+    20260713192319_AddProjectsTable.cs
+    20260713192319_AddProjectsTable.Designer.cs
+    20260713193948_AddProjectOrganizationTenant.cs
+    20260713193948_AddProjectOrganizationTenant.Designer.cs
+    20260723105135_AddTransactionsTable.cs
+    20260723105135_AddTransactionsTable.Designer.cs
+    20260723153708_AddTransactionOrganizationId.cs
+    20260723153708_AddTransactionOrganizationId.Designer.cs
+    20260724133930_AddSharedExpenses.cs
+    20260724133930_AddSharedExpenses.Designer.cs
+    AuditDbContextModelSnapshot.cs
+NotificationAuditService.csproj
+PROJECT_STRUCTURE.txt
+README.md
+src/
+    audit/
+        AuditController.cs
+        AuditLog.cs
+        AuditService.cs
+        IAuditService.cs
+    Common/
+        ITenantContext.cs
+        TenantContext.cs
+    Data/
+        AuditDbContext.cs
+    Database/
+        InitialCreate.sql
+    expenses/
+        BalanceCalculationService.cs
+        BalanceResults.cs
+        Contracts/
+            CreateExpenseRequest.cs
+            ExpenseResponse.cs
+            GroupBalanceResponse.cs
+        ExpenseParticipant.cs
+        ExpensesController.cs
+        IBalanceCalculationService.cs
+        ISharedExpenseRepository.cs
+        ISharedExpenseService.cs
+        MoneyMath.cs
+        SharedExpense.cs
+        SharedExpenseRepository.cs
+        SharedExpenseService.cs
+        SplitType.cs
+    notifications/
+        INotificationService.cs
+        Notification.cs
+        NotificationsController.cs
+        NotificationService.cs
+    Program.cs
+    projects/
+        Contracts/
+            CreateProjectRequest.cs
+            ProjectResponse.cs
+            UpdateProjectStatusRequest.cs
+        IProjectRepository.cs
+        IProjectService.cs
+        Project.cs
+        ProjectRepository.cs
+        ProjectsController.cs
+        ProjectService.cs
+        ProjectStatus.cs
+    transactions/
+        Contracts/
+            CreateTransactionRequest.cs
+            TransactionResponse.cs
+        ITransactionRepository.cs
+        ITransactionService.cs
+        Transaction.cs
+        TransactionRepository.cs
+        TransactionsController.cs
+        TransactionService.cs
+tests/
+    NotificationAuditService.Tests/
+        Expenses/
+            ExpensesIntegrationTests.cs
+        NotificationAuditService.Tests.csproj
+        Projects/
+            ProjectsIntegrationTests.cs
+        TestInfrastructure/
+            ProjectApiFactory.cs
+        Transactions/
+            TransactionsIntegrationTests.cs
+    README.md
