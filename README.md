@@ -9,6 +9,7 @@ A comprehensive .NET 8 Web API for managing notifications and audit logging with
 | [README.md](README.md) | This file — features, API, schema, and how to run the service. |
 | [PR_DESCRIPTION.md](docs/PR_DESCRIPTION.md) | Change summary, AI-tool disclosure, service integration, testing, risks, self-review checklist. |
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Service relationship & integration contract, layered data flow, and key design decisions. |
+| [ARCHITECTURE_FINTECH.md](docs/ARCHITECTURE_FINTECH.md) | Transaction ↔ Expense-splitting relationship, layered data flow, and why it fits fintech. |
 | [SPEC.md](docs/SPEC.md) | The ordered prompt chain — feature, technique, and rationale per prompt, plus post-generation corrections. |
 | [PROMPTS.md](docs/PROMPTS.md) | Narrative log of how AI pair-programming built the service and where human judgment was needed. |
 | [PROMPT_ENGINEERING.md](docs/PROMPT_ENGINEERING.md) | Per-prompt table: Copilot mode (Ask/Edit/Agent), features used, technique applied, and rationale. |
