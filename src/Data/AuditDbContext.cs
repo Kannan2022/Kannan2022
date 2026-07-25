@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using NotificationAuditService.Audit;
+using NotificationAuditService.Expenses;
 using NotificationAuditService.Notifications;
 using NotificationAuditService.Projects;
+using NotificationAuditService.Transactions;
 
 namespace NotificationAuditService.Data;
 
@@ -14,6 +16,9 @@ public class AuditDbContext : DbContext
     public DbSet<AuditLog> AuditLogs { get; set; }
     public DbSet<Notification> Notifications { get; set; }
     public DbSet<Project> Projects { get; set; }
+    public DbSet<Transaction> Transactions { get; set; }
+    public DbSet<SharedExpense> SharedExpenses { get; set; }
+    public DbSet<ExpenseParticipant> ExpenseParticipants { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -64,6 +69,55 @@ public class AuditDbContext : DbContext
             entity.HasIndex(e => new { e.OrganizationId, e.TeamId });
             entity.HasIndex(e => new { e.OrganizationId, e.TeamId, e.Status });
             entity.HasIndex(e => new { e.OrganizationId, e.CreatedAt });
+        });
+
+        // Transaction configuration
+        modelBuilder.Entity<Transaction>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.OrganizationId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.UserId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Currency).IsRequired().HasMaxLength(10);
+            entity.Property(e => e.Amount).HasPrecision(18, 2);
+            entity.Property(e => e.Description).HasMaxLength(1000);
+
+            // Tenant-first composite indexes: every access pattern begins with the organisation,
+            // matching how the repository scopes each query.
+            entity.HasIndex(e => e.OrganizationId);
+            entity.HasIndex(e => new { e.OrganizationId, e.UserId });
+            entity.HasIndex(e => new { e.OrganizationId, e.UserId, e.CreatedAt });
+        });
+
+        // SharedExpense configuration
+        modelBuilder.Entity<SharedExpense>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.OrganizationId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.GroupId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Amount).HasPrecision(18, 2);
+            entity.Property(e => e.Currency).IsRequired().HasMaxLength(10);
+            entity.Property(e => e.PaidByUserId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.SplitType).HasConversion<string>().HasMaxLength(20);
+
+            // Tenant-first composite indexes.
+            entity.HasIndex(e => e.OrganizationId);
+            entity.HasIndex(e => new { e.OrganizationId, e.GroupId });
+            entity.HasIndex(e => new { e.OrganizationId, e.GroupId, e.CreatedAt });
+
+            entity.HasMany(e => e.Participants)
+                  .WithOne()
+                  .HasForeignKey(p => p.SharedExpenseId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ExpenseParticipant configuration
+        modelBuilder.Entity<ExpenseParticipant>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.UserId).IsRequired().HasMaxLength(255);
+            entity.Property(e => e.ShareAmount).HasPrecision(18, 2);
+            entity.HasIndex(e => e.SharedExpenseId);
         });
     }
 }

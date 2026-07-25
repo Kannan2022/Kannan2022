@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using NotificationAuditService.Audit;
 using NotificationAuditService.Common;
 using NotificationAuditService.Data;
+using NotificationAuditService.Expenses;
 using NotificationAuditService.Notifications;
 using NotificationAuditService.Projects;
+using NotificationAuditService.Transactions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,15 @@ builder.Services.AddScoped<IAuditService, AuditService>();
 // Project feature: model -> repository -> service -> controller
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
+
+// Transaction feature: model -> repository -> service -> controller
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+
+// Expense-splitting feature: model -> repository -> service(s) -> controller
+builder.Services.AddScoped<ISharedExpenseRepository, SharedExpenseRepository>();
+builder.Services.AddScoped<ISharedExpenseService, SharedExpenseService>();
+builder.Services.AddScoped<IBalanceCalculationService, BalanceCalculationService>();
 
 // Multi-tenant context resolved from the authenticated principal
 builder.Services.AddHttpContextAccessor();

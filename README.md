@@ -11,6 +11,7 @@ A comprehensive .NET 8 Web API for managing notifications and audit logging with
 | [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Service relationship & integration contract, layered data flow, and key design decisions. |
 | [SPEC.md](docs/SPEC.md) | The ordered prompt chain — feature, technique, and rationale per prompt, plus post-generation corrections. |
 | [PROMPTS.md](docs/PROMPTS.md) | Narrative log of how AI pair-programming built the service and where human judgment was needed. |
+| [PROMPT_ENGINEERING.md](docs/PROMPT_ENGINEERING.md) | Per-prompt table: Copilot mode (Ask/Edit/Agent), features used, technique applied, and rationale. |
 | [TOOL_STRATEGY.md](docs/TOOL_STRATEGY.md) | Which AI features fit which tasks, accept-vs-override heuristics, guardrails, and risks. |
 | [REVIEW.md](docs/REVIEW.md) | Structured code review of the Project service (found the cross-tenant IDOR). |
 | [IMPACT_ANALYSIS.md](docs/IMPACT_ANALYSIS.md) | Impact of capturing caller IP addresses — affected components, compliance risks, rollout sequencing. |
